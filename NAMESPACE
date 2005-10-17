@@ -1,0 +1,12 @@
+import("methods")
+importFrom("stats", "simulate")
+import("distr")
+
+export("cload", "Dataclass", "Simulation", "Contsimulation")
+exportClasses("vectororNULL", "Dataclass", "Simulation", "Contsimulation")
+exportMethods("filename", "filename<-", "Data", "Data<-", "runs", "runs<-", 
+              "samplesize", "samplesize<-", "savedata", "seed", "seed<-",
+              "distribution", "distribution<-", "ind", "Data.id", "Data.c",
+              "rate", "rate<-", "distribution.id", "distribution.id<-", 
+              "distribution.c", "distribution.c<-")
+exportMethods("initialize", "print", "plot", "summary", "simulate")
