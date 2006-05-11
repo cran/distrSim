@@ -1,0 +1,20 @@
+######################################################################
+#  News: to package distrSim 
+######################################################################
+
+##############
+v 1.7
+##############
+
+* setRNG Namespace imported  
+* updated citation file
+* NEWS file
+* distrSim-package.Rd file
+
+
+##############
+v 1.6
+##############
+
+* the signature of simulate has been changed in order to stay compatible with the generic simulate from package stats
+  the user should not notice any difference

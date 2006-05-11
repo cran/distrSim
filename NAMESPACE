@@ -1,6 +1,8 @@
 import("methods")
 importFrom("stats", "simulate")
+importFrom("setRNG", "setRNG")
 import("distr")
+import("startupmsg")
 
 export("cload", "Dataclass", "Simulation", "Contsimulation")
 exportClasses("vectororNULL", "Dataclass", "Simulation", "Contsimulation")
