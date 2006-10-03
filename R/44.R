@@ -1,5 +1,3 @@
-require(setRNG)
-
 ################################
 ##
 ## Class: Contsimulation
@@ -8,12 +6,17 @@ require(setRNG)
 
 setClass("Contsimulation",
          representation("Dataclass",
-                        ind = "vectororNULL",
-                        Data.id = "vectororNULL",
-                        Data.c = "vectororNULL",
+                        ind = "MatrixorNULLorVector",
                         rate = "numeric",
-                        distribution.c = "UnivariateDistribution",
-                        distribution.id = "UnivariateDistribution",
+ ##new 03-10-06:
+                        Data.id = "ArrayorNULLorVector",
+                        Data.c =  "ArrayorNULLorVector",
+                        distribution.c = "Distribution",
+                        distribution.id = "Distribution",
+ ###old:        Data.id = "vectororNULL",
+ ###old:        Data.c = "vectororNULL",
+ ###old:        distribution.c = "UnivariateDistribution"
+ ###old:        distribution.id = "UnivariateDistribution"
                         seed = "list"),
          contains = "Dataclass")            
 
@@ -30,6 +33,10 @@ setMethod("initialize", "Contsimulation",
             .Object@Data <- NULL
             .Object@Data.id <- NULL
             .Object@Data.c <- NULL
+### new 031006:            
+            .Object@version <- "1.8"
+            .Object@obsDim <- dim(distribution.id)
+###
             .Object@filename <- filename
             .Object@runs <- runs
             .Object@samplesize <- samplesize        
@@ -76,9 +83,12 @@ setReplaceMethod("rate", "Contsimulation",
                  })
 setReplaceMethod("distribution.c", "Contsimulation",
                  function(object, value){
+                   if(all(identical(dim(distribution.id(object)),dim(value))))
+                              d.id <- distribution.id(object)
+                   else       d.id <- value
                    object <- new("Contsimulation",
                                  seed = seed(object),
-                                 distribution.id = distribution.id(object),
+                                 distribution.id = d.id,
                                  distribution.c = value,
                                  rate = rate(object),
                                  filename = filename(object),
@@ -88,10 +98,13 @@ setReplaceMethod("distribution.c", "Contsimulation",
                  })
 setReplaceMethod("distribution.id", "Contsimulation",
                  function(object, value){
+                   if(all(identical(dim(distribution.c(object)),dim(value))))
+                              d.c <- distribution.c(object)
+                   else       d.c <- value
                    object <- new("Contsimulation",
                                  seed = seed(object),
                                  distribution.id = value,
-                                 distribution.c = distribution.c(object),
+                                 distribution.c = d.c,
                                  rate = rate(object),
                                  filename = filename(object),
                                  runs = runs(object),
@@ -152,6 +165,8 @@ validContsimulation <- function(object){
     stop("rate has to be in [0,1]")
   if(rate(object) > 1)
     stop("rate has to be in [0,1]")
+  if(dim(distribution.id(object))!=dim(distribution.c(object)))
+    stop("Dimensions of ideal and contaminated distribution must coincide")
   else return(TRUE)
 }
 
@@ -161,7 +176,7 @@ setValidity("Contsimulation", validContsimulation)
 
 
 ## Save method
-setMethod("savedata", "Contsimulation", function(object){
+setMethod("savedata", "Contsimulation", function(object,...){
   if(is.null(filename(object))) stop("This simulation has to be given a filename before it can be saved to harddisk")
   
   name <- as.character(substitute(object))
@@ -185,14 +200,38 @@ setMethod("simulate",signature(object="Contsimulation"),
                 stop("Sample size of an object of class Simulation is changed by the replacement method samplesize(<object>,<value>)!")
 
             setRNG(seed(object)) 
+
+###new:031006:
+            data.raw <- r(distribution.id(object))(object@runs*object@samplesize)
+
+            Data.id.raw <- aperm(array( t(data.raw),
+                                    c(object@obsDim, object@samplesize, object@runs)
+                                   ), perm = c(2,1,3))
+
+            data.raw <- r(distribution.c(object))(object@runs*object@samplesize)
+            Data.c.raw <- aperm(array( t(data.raw),
+                                   c(object@obsDim, object@samplesize, object@runs)
+                                  ), perm = c(2,1,3))
+            Ind.raw <- matrix(rbinom(object@runs*object@samplesize,1,object@rate),
+                               object@samplesize,object@runs)
             
-            eval.parent(substitute(object@Data.id <- matrix(r(distribution.id(object))(object@runs*object@samplesize),
-                                                     object@runs,object@samplesize))) 
-            eval.parent(substitute(object@Data.c <- matrix(r(distribution.c(object))(object@runs*object@samplesize),
-                                                     object@runs,object@samplesize))) 
-            eval.parent(substitute(object@ind <- matrix(rbinom(object@runs*object@samplesize,1,object@rate),
-                                                     object@runs,object@samplesize)))
-            eval.parent(substitute(object@Data <- (1-object@ind)*object@Data.id+object@ind*object@Data.c))
+            Indx <- array(Ind.raw,c(samplesize(object),runs(object),obsDim(object)))
+            x.id <- aperm(aperm(Data.id.raw, perm = c(1,3,2))*(1-Indx), perm = c(1,3,2))
+            x.c  <- aperm(aperm(Data.c.raw,  perm = c(1,3,2))* Indx,    perm = c(1,3,2))
+
+            Data.raw <- x.id + x.c
+            eval.parent(substitute(object@Data.id <- Data.id.raw)) 
+            eval.parent(substitute(object@Data.c <- Data.c.raw))
+            eval.parent(substitute(object@ind <- Ind.raw))
+            eval.parent(substitute(object@Data <- Data.raw))
+### old:
+###            eval.parent(substitute(object@Data.id <- matrix(r(distribution.id(object))(object@runs*object@samplesize),
+###                                                     object@runs,object@samplesize))) 
+###            eval.parent(substitute(object@Data.c <- matrix(r(distribution.c(object))(object@runs*object@samplesize),
+###                                                     object@runs,object@samplesize))) 
+###            eval.parent(substitute(object@ind <- matrix(rbinom(object@runs*object@samplesize,1,object@rate),
+###                                                     object@runs,object@samplesize)))
+###            eval.parent(substitute(object@Data <- (1-object@ind)*object@Data.id+object@ind*object@Data.c))
             
             return(invisible())
           })
@@ -200,24 +239,117 @@ setMethod("simulate",signature(object="Contsimulation"),
 
 ###Plot
 
-setMethod("plot","Contsimulation",
-          function(x,y=NULL,...){
+setMethod("plot","Contsimulation", 
+                    function(x,y=NULL, obs0=1:samplesize(x), dims0=1:obsDim(x), runs0=1:runs(x), ...){
+
+            dots <- list(...)
             if(is.null(Data(x)))
-              stop("No Data found -> simulate first")
+               stop("No Data found -> simulate first")
             
             if(any(Data(x) == 0)) return("Warning: plot won't work properly")
             
-            y0<-1:runs(x)
-            x1 <- Data(x) * (1 - ind(x))
-            x1[x1 == 0] <- Inf
-            x2 <- Data(x) * ind(x)
-            x2[x2 == 0] <- Inf
             
-            matplot(y0,x1,ylim = range(Data(x)), xlab="run-index",ylab="data",type="p",pch="*",col="blue")
-            if(any(x2 != Inf)) matpoints(y0,x2,type="p",pch="x",col="red")
+            lobs0 <- min(getdistrSimOption("MaxNumberofPlottedObs"), length(obs0))           
+            lrun0 <- min(getdistrSimOption("MaxNumberofPlottedRuns"), length(runs0))           
+            ldim0 <- min(getdistrSimOption("MaxNumberofPlottedObsDims"), length(dims0))           
+            if((lrun0<length(runs0))|(ldim0<length(dims0))|(lobs0<length(obs0)))   
+                warning(paste("your data set is too big; only ", lobs0,  "x", ldim0, 
+                               "x", lrun0, "observations x dimensions x runs are plotted"))
+
+            x.id <- array(aperm(aperm(Data(x),c(1,3,2))*array(1-ind(x),c(samplesize(x),runs(x),obsDim(x))),c(1,3,2)),
+                           c(lobs0,ldim0,lrun0))
+            x.id[x.id == 0] <- Inf
+            
+            x.c <-  array(aperm(aperm(Data(x),c(1,3,2))*array(ind(x),c(samplesize(x),runs(x),obsDim(x))),c(1,3,2)),
+                           c(lobs0,ldim0,lrun0))
+            x.c[x.c == 0] <- Inf
+            
+      #      get(getOption("device"))()
+            oldwarn <- getOption("warn")
+            oldpar <- par()$mfrow
+            options("warn" = -1)
+            par(mfrow=c(1,lrun0))
+            
+            y0<-1:lobs0
+            dots[["x"]] <- y0
+
+            #if(lrun0==1)
+            #   {matplot(y0,x.id[,dims0[1:ldim0]],ylim = 2*range(Data.id(x)),x 
+            #            xlab=gettextf("observation-index"),ylab=gettextf("data"),type="p",cex=1.3,pch="*", 
+            #            col=(colors()[grep("blue",colors())])[65:1]
+            #            )
+            #
+            #    if(any(x.c != Inf)) 
+            #        matpoints(y0,x.c[,dims0[1:ldim0]], type="p",pch="x",cex=0.8,col=colors()[grep("red",colors())])
+            #   }        
+            #else
+            #  {            
+            
+            ## catch ylims given in ...
+            ylim0<-matrix(2*range(Data.id(x)),2,lrun0)
+            ##  wylim <- FALSE ### is ylim specified? changed: ylim has to be set by default...
+            if("ylim" %in% names(dots)) 
+                { wylim <- TRUE
+                  oldwarn <- getOption("warn"); options("warn" = -1)
+                  ylim1 <- as.matrix(dots[["ylim"]])
+                  c1 <- ncol(ylim1); c2 <- ldim0%/%c1; c3 <- ldim0%%c1
+                  if(c2>0)
+                     ylim0[,1:(c2*c1)] <- ylim1
+                  if(c3>0)
+                     ylim0[,c2*c1+(1:c3)]<- ylim1[,1:c3]
+                  options("warn" = oldwarn) }  
+            
+            dots["xlab"] <- gettextf("observation-index")
+            dots["ylab"] <- gettextf("data")
+            dots["type"] <- "p"
+            
+            cex.id0 <- rep(1.3,ldim0,length=ldim0) 
+            if("cex.id" %in% names(dots) )
+                cex.id0 <- rep(unlist(dots["cex.id"]),ldim0,length=ldim0) 
+            
+            cex.c0 <- rep(0.8,ldim0,length=ldim0) 
+            if("cex.c" %in% names(dots) )
+                cex.c0 <- rep(unlist(dots["cex.c"]),ldim0,length=ldim0) 
+
+            pch.id0 <- rep("*",ldim0,length=ldim0) 
+            if("pch.id" %in% names(dots) )
+                pch.id0 <- rep(unlist(dots["pch.id"]),ldim0,length=ldim0) 
+
+            pch.c0 <- rep("x",ldim0,length=ldim0) 
+            if("pch.c" %in% names(dots) )
+                pch.c0 <- rep(unlist(dots["pch.c"]),ldim0,length=ldim0) 
+
+            col.id0 <- rep((colors()[grep("blue",colors())])[65:1],ldim0,length=ldim0) 
+            if("col.id" %in% names(dots))
+                col.id0 <- rep(unlist(dots["col.id"]),ldim0,length=ldim0) 
+            
+            col.c0 <- rep((colors()[grep("red",colors())]),ldim0,length=ldim0) 
+            if("col.c" %in% names(dots))
+                col.c0 <- rep(unlist(dots["col.c"]),ldim0,length=ldim0) 
+
+
+            for( i in 1: lrun0)
+                   { ### if(wylim) 
+                     dots[["ylim"]] <- ylim0[,i]
+                     dots[["y"]] <- x.id[,dims0[1:ldim0],runs0[i]]
+                     dots[["cex"]] <- cex.id0
+                     dots[["pch"]] <- pch.id0
+                     dots[["col"]] <- col.id0
+                     do.call("matplot", args=dots)
+                   
+                    if(any(x.c[,dims0[1:ldim0],runs0[i]] != Inf)) 
+                       { dots[["cex"]] <- cex.c0
+                         dots[["pch"]] <- pch.c0
+                         dots[["col"]] <- col.c0
+                         dots[["y"]] <- x.c[,dims0[1:ldim0],runs0[i]]
+                         do.call("matpoints", args=dots)                                              
+                       }   
+                   }                  
+            #   }        
+            
+            par(mfrow=oldpar)
+            options("warn" = oldwarn)
           })
-
-
 
 ###summary
 
@@ -226,30 +358,30 @@ setMethod("summary","Contsimulation",
             if(is.null(Data(object)))
               stop("No Data found -> simulate first")
             
-            cat("name of simulation: ",filename(object),"\n")
-            cat("number of runs: ",runs(object),"\n")
-            cat("size of sample: ",samplesize(object),"\n")
-            cat("rate of contamination: ",rate(object),"\n")
-            cat("real Data:\n")
-            y0<-1:(min(6,runs(object)))
-            x0<-Data(object)[y0,]
-            if(runs(object) == 1) apply(t(x0),1,summary)
-            else if(samplesize(object) == 1) apply(as.matrix(x0),1,summary)
-            else apply(x0,1,summary)
+            cat(gettextf("name of simulation: %s\n",filename(object)))
+            cat(gettextf("rate of contamination: %f\n",rate(object)))
+            cat(gettextf("real Data:\n"))
+            summary(as(object,"Dataclass"), dims0=1:obsDim(object), runs0=1:runs(object), ..., NOT.A.SIMULATION=FALSE)            
           })
+
+###print
 
 setMethod("print","Contsimulation",
           function(x,...){
-            cat("filename of Contsimulation: ",filename(x),"\n")
-            cat("number of runs: ",runs(x),"\n")
-            cat("size of sample: ",samplesize(x),"\n")
-            cat("rate of contamination: ",rate(x),"\n")
+            cat(gettextf("filename of Simulation: %s\n",filename(x)))
+            print(as(x,"Dataclass"), ..., NOT.A.SIMULATION=FALSE)                        
+            cat(gettextf("rate of contamination: %f\n",rate(x)))
             
             distr.id <-distribution.id(x)
-            distr.c <- distribution.c(x)
-            
-            cat("ideal distribution:\n")
+            distr.c <- distribution.c(x)            
+
+            cat(gettextf("ideal distribution:\n"))
             print(distr.id)
-            cat("contaminating distribution:\n")
+            cat(gettextf("contaminating distribution:\n"))
             print(distr.c)
           })
+
+
+setMethod("show", "Contsimulation",
+          function(object)print(object))
+

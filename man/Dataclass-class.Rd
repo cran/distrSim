@@ -10,21 +10,28 @@
   stored in a unified way.
 }
 \section{Objects from the Class}{
-  Objects can be created by calls of the form \code{Dataclass(filename, Data)}. 
+  Objects can be created by calls of the form \code{Dataclass(filename = "Data-set", Data, name = "Data-Set")}. 
   A Dataclass-object includes, aside from the actual data, a filename
-  and the number of runs and the size of the sample, which give the
-  number of rows and columns of the data matrix.
+  and the size of the sample, the observation dimension, and the number of runs, which give the
+  number of rows and columns (and, if more than one run, slices) 
+  of the data array.
 }
 \section{Slots}{
   \describe{
     \item{\code{filename}:}{
       Object of class \code{"character"}: the filename the data shall be saved}
-    \item{\code{Data}:}{Object of class \code{"vectororNULL"}:
+    \item{\code{name}:}{
+      Object of class \code{"character"}: a name for the Data}
+    \item{\code{Data}:}{Object of class \code{"ArrayorNULLorVector"}:
       the actual data, either of type "NULL" (means no data) or "vector"}
+    \item{\code{obsDim}:}{Object of class \code{"numeric"}:
+      the observation dimension of the data}
     \item{\code{runs}:}{Object of class \code{"numeric"}:
       the number of runs of the data}
     \item{\code{samplesize}:}{Object of class \code{"numeric"}:
       the size of the sample}
+    \item{\code{version}:}{Object of class \code{"character"}:
+      the package version under which this object was generated}
   }
 }
 \section{Methods}{
@@ -41,18 +48,28 @@
       returns the the filename}
     \item{filename<-}{\code{signature(object = "Dataclass")}:
       changes the the filename}
+    \item{name}{\code{signature(object = "Dataclass")}:
+      returns the the name}
+    \item{name<-}{\code{signature(object = "Dataclass")}:
+      changes the the name}
     \item{initialize}{\code{signature(.Object = "Dataclass")}:
       initialize method}
+    \item{obsDim}{\code{signature(object = "Dataclass")}:
+      returns the dimension of the observations}
     \item{runs}{\code{signature(object = "Dataclass")}:
       returns the number of runs}
     \item{samplesize}{\code{signature(object = "Dataclass")}:
       returns the size of the sample}
+    \item{getVersion}{\code{signature(object = "Dataclass")}:
+      returns the version slot of this object}
     \item{savedata}{\code{signature(object = "Dataclass")}:
       saves the object in the directory of R and also a copy without data}
     \item{plot}{\code{signature(x = "Dataclass")}:
-      produces a plot of the data matrix}
+      produces a plot of the data matrix; ; for details confer \code{\link{plot-methods}}}
     \item{print}{\code{signature(x = "Dataclass")}:
-      returns filename, number of runs and the size of the sample}
+      returns filename, the observation dimension, the number of runs 
+      and the size of the sample, and, if from a version > 1.8, also the package version under 
+      which the object was generated}
     \item{summary}{\code{signature(object = "Dataclass")}:
       returns the same information as print, moreover a statistical
       summary for each run}
@@ -80,15 +97,22 @@
 \code{\link{load}}
 \code{\link{cload}}
 \code{\link{savedata-methods}}
+\code{\link{getVersion-methods}}
 }
 \examples{
-D <- Dataclass(Data = matrix(c(1,2,3,4,5,6),2),
+D66 <- Dataclass(filename="N74", Data = matrix(1:36,6))
+D66
+#
+D <- Dataclass(Data = array(c(1,2,3,4,5,6),c(samplesize=2,obsdim=3,Runs=1)),
                filename = "xyz.sav")
 # A new object of type "Dataclass" is created.
+#
+isOldVersion(D) ##NO!
+#
 savedata(D)
 # creates a file called "xyz.sav" where the information is saved and a
 # copy "xyz.sav.comment" without data
-Data(D) <- matrix(c(11,12,13,14,15,16),2) # changes the data of D
+Data(D) <- array(c(11,12,13,14,15,16),c(samplesize=2,obsdim=3,Runs=1)) # changes the data of D
 cload("xyz.sav") # loads the object without data - it is called "D.comment"
 D.comment
 load("xyz.sav") # loads the original object "D"

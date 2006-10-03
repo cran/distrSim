@@ -1,4 +1,4 @@
-require(distr)
+require(distrSim)
 
 sim <- new("Simulation",
            seed = setRNG(),
@@ -6,8 +6,6 @@ sim <- new("Simulation",
            filename="sim_01",
            runs = 1000,
            samplesize = 30)
-#generate an object of class Simulation
-#(ideal) situation:  x_i~i.i.d. N(0,1) 
 
 contsim <- new("Contsimulation",
                seed = setRNG(),
@@ -18,10 +16,11 @@ contsim <- new("Contsimulation",
                runs = 1000,
                samplesize = 30)
 
-#generate an object of class Contsimulation
-
-#fill the data-slots
 simulate(sim)
 simulate(contsim)
+
+print(sim)
+summary(contsim)
+plot(contsim)
 
 

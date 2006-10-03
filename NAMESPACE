@@ -4,11 +4,14 @@ importFrom("setRNG", "setRNG")
 import("distr")
 import("startupmsg")
 
-export("cload", "Dataclass", "Simulation", "Contsimulation")
-exportClasses("vectororNULL", "Dataclass", "Simulation", "Contsimulation")
+export("cload", "Dataclass", "Simulation", "Contsimulation",
+              "distrSimoptions", "getdistrSimOption")
+exportClasses("vectororNULL", "Dataclass", "Simulation", "Contsimulation",
+              "MatrixorNULLorVector","ArrayorNULLorVector")
 exportMethods("filename", "filename<-", "Data", "Data<-", "runs", "runs<-", 
               "samplesize", "samplesize<-", "savedata", "seed", "seed<-",
               "distribution", "distribution<-", "ind", "Data.id", "Data.c",
               "rate", "rate<-", "distribution.id", "distribution.id<-", 
-              "distribution.c", "distribution.c<-")
-exportMethods("initialize", "print", "plot", "summary", "simulate")
+              "distribution.c", "distribution.c<-", "name", "name<-")
+exportMethods("initialize", "print", "plot", "summary", "simulate", "show",
+              "obsDim", "isOldVersion", "conv2NewVersion", "getVersion")

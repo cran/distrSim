@@ -4,17 +4,27 @@
 \alias{print,Dataclass-method}
 \alias{print,Simulation-method}
 \alias{print,Contsimulation-method}
-\title{ Methods for Function print in Package `distrSim' }
-\description{print-methods}
+\alias{show-methods}
+\alias{show,Dataclass-method}
+\alias{show,Simulation-method}
+\alias{show,Contsimulation-method}
+\title{ Methods for Function print/show in Package `distrSim' }
+\description{print and show - methods}
 
 \section{Methods}{\describe{
 
 
-\item{print}{\code{signature(x = "Dataclass")}: returns filename, number of runs and the size of the sample }
+\item{print}{\code{signature(x = "Dataclass")}: returns name, filename, the observation dimension, the number of runs 
+ and the size of the sample, and, if from a version > 1.8, also the package version under which the object was generated}
 
-\item{print}{\code{signature(x = "Simulation")}: returns filename, seed, number of runs, the size of the sample and the distribution }
+\item{print}{\code{signature(x = "Simulation")}: as for \code{signature(x = "Dataclass")} and, additionally,
+                   seed and the distribution }
 
-\item{print}{\code{signature(x = "Contsimulation")}: returns filename, seed, number of runs, the size of the sample, the rate and the distributions }
+\item{print}{\code{signature(x = "Contsimulation")}:  as for \code{signature(x = "Dataclass")} and, additionally,
+              seed, the contamination rate and the distributions}
+
+\item{show}{\code{signature(x = "Dataclass")}, \code{signature(x = "Simulation")},
+            \code{signature(x = "Contsimulation")}: as corresponding \code{print} method}
 
 }}
 \keyword{}

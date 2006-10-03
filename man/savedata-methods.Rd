@@ -18,6 +18,11 @@
 \item{savedata}{\code{signature(object = "Contsimulation")}: saves the object without the data in the directory of R
     (After loading the data can be reproduced by using simulate.) }
 }}
+
+\note{For an example, see \code{\link{Simulation-class}}
+and \code{\link{Contsimulation-class}}
+}
+
 \seealso{
 \code{\link{Dataclass-class}}
 \code{\link{Simulation-class}}
