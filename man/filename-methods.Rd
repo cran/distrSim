@@ -16,4 +16,9 @@
 \item{filename<-}{\code{signature(object = "Dataclass")}: changes the filename }
     
 }}
-\keyword{}
+\keyword{file}
+\keyword{manip}
+\keyword{methods}
+\concept{S4 data class}
+\concept{accessor function}
+\concept{replacement function}

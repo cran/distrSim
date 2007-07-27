@@ -22,4 +22,11 @@
 \note{The value to which the seed is set has to be consistent with the \pkg{setRNG}-package;
 to draw a ``new'' simulation, use something like \code{seed(X)<-setRNG();simulate(X)}; 
 cf. manual to this package, p.~9}
-\keyword{}
+\keyword{methods}
+\concept{simulation}
+\concept{S4 simulation class}
+\concept{pseudo random numbers}
+\concept{RNG}
+\concept{seed}
+\concept{accessor function}
+\concept{replacement function}

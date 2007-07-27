@@ -14,4 +14,11 @@
 \item{distribution.c}{\code{signature(object = "Contsimulation")}: returns the distribution of the contaminated data}
 \item{distribution.c<-}{\code{signature(object = "Contsimulation")}: changes the distribution of the contaminated data}
 }}
-\keyword{}
+\concept{simulation}
+\concept{S4 simulation class}
+\concept{accessor function}
+\concept{replacement function}
+\concept{contaminating distribution}
+\concept{contamination}
+\keyword{methods}
+\keyword{distribution}

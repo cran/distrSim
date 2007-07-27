@@ -21,4 +21,7 @@ in the signature.
 
 \note{Dataclass-class can save data either of type "NULL" (means no data) or "vector" or "array"}
 \seealso{\code{\link{Dataclass-class}}}
-\keyword{}
+\keyword{classes}
+\concept{class union}
+\concept{virtual}
+

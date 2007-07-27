@@ -33,4 +33,7 @@ function(filename){
   eval.parent(parse(text=paste("load(\"",filename,".comment\")", sep = "")))
   }
 }
-\keyword{}
+\keyword{methods}
+\keyword{file}
+\concept{save}
+\concept{comment}

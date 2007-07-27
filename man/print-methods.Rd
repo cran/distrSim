@@ -27,4 +27,7 @@
             \code{signature(x = "Contsimulation")}: as corresponding \code{print} method}
 
 }}
-\keyword{}
+\keyword{print}
+\keyword{methods}
+\concept{S4 simulation class}
+\concept{simulation}

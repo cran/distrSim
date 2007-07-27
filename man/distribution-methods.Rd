@@ -14,4 +14,9 @@
 \item{distribution}{\code{signature(object = "Simulation")}: returns the slot \code{distribution} of the simulation}
 \item{distribution<-}{\code{signature(object = "Simulation")}: changes the slot \code{distribution} of the simulation}
 }}
-\keyword{}
+\concept{simulation}
+\concept{S4 simulation class}
+\concept{accessor function}
+\concept{replacement function}
+\keyword{methods}
+\keyword{distribution}

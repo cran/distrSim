@@ -10,4 +10,10 @@
 
 \item{Data.id}{\code{signature(object = "Contsimulation")}: returns the ideal data }
 }}
-\keyword{}
+\concept{simulation}
+\concept{S4 simulation class}
+\concept{accessor function}
+\concept{ideally distributed data}
+\concept{contamination}
+\keyword{methods}
+\keyword{distribution}

@@ -120,4 +120,6 @@ savedata(cs) # saves the object in the working directory of R...
 load("csim") # loads it again...
 Data(cs) # ...without the data - use simulate to return it!
 }
-\keyword{}
+\keyword{manip}
+\concept{S4 data class}
+\concept{S4 simulation class}

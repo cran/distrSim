@@ -25,4 +25,7 @@ statistical summary for each run; optional arguments: as with \code{signature(ob
 rate and a statistical summary for each run of the real data; optional arguments: as with \code{signature(object = "Dataclass")} }
 
 }}}
-\keyword{}
+\concept{summary}
+\keyword{methods}
+\concept{S4 data class}
+\concept{S4 simulation class}

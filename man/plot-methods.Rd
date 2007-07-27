@@ -41,4 +41,7 @@ typical plot arguments may be passed; some have slightly different meaning (comp
 }
  }
 }}
-\keyword{}
+\keyword{methods}
+\keyword{hplot}
+\concept{simulation}
+\concept{S4 simulation class}

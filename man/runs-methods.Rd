@@ -16,4 +16,9 @@
 \item{runs<-}{\code{signature(object = "Simulation")}: changes the number of runs }
 \item{runs<-}{\code{signature(object = "Contsimulation")}: changes the number of runs }
 }}
-\keyword{}
+\keyword{methods}
+\concept{simulation}
+\concept{S4 simulation class}
+\concept{runs}
+\concept{accessor function}
+\concept{replacement function}

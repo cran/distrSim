@@ -14,4 +14,10 @@
 \item{rate}{\code{signature(object = "Contsimulation")}: returns the contamination rate }
 \item{rate<-}{\code{signature(object = "Contsimulation")}: modifies the contamination rate }
 }}
-\keyword{}
+\keyword{methods}
+\concept{simulation}
+\concept{S4 simulation class}
+\concept{contamination}
+\concept{contamination rate}
+\concept{accessor function}
+\concept{replacement function}

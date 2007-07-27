@@ -10,4 +10,7 @@
 
 \item{ind}{\code{signature(object = "Contsimulation")}: returns an indicator showing which data is contaminated }
 }}
-\keyword{}
+\keyword{manip}
+\concept{accessor function}
+\keyword{methods}
+\concept{S4 data class}

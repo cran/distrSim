@@ -16,4 +16,8 @@
 \item{name<-}{\code{signature(object = "Dataclass")}: changes the name }
     
 }}
-\keyword{}
+\keyword{manip}
+\keyword{methods}
+\concept{S4 data class}
+\concept{accessor function}
+\concept{replacement function}

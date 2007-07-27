@@ -53,3 +53,5 @@ distrSimoptions("MaxNumberofPlottedObsDims" = 5)
 getdistrSimOption("MaxNumberofPlottedObsDims")
 }
 \keyword{misc}
+\concept{global options}
+\concept{options}

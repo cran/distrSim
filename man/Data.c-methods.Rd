@@ -10,4 +10,10 @@
 \item{Data.c}{\code{signature(object = "Dataclass")}: returns the
   contaminated data }
 }}
-\keyword{}
+\concept{simulation}
+\concept{S4 simulation class}
+\concept{accessor function}
+\concept{contaminating data}
+\concept{contamination}
+\keyword{methods}
+\keyword{distribution}

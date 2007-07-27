@@ -14,4 +14,4 @@ exportMethods("filename", "filename<-", "Data", "Data<-", "runs", "runs<-",
               "rate", "rate<-", "distribution.id", "distribution.id<-", 
               "distribution.c", "distribution.c<-", "name", "name<-")
 exportMethods("initialize", "print", "plot", "summary", "simulate", "show",
-              "obsDim", "isOldVersion", "conv2NewVersion", "getVersion")
+              "obsDim", "conv2NewVersion", "getVersion")

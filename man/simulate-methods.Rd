@@ -14,4 +14,9 @@
 \item{simulate}{\code{signature(object = "Contsimulation")}: generates the random numbers for the simulation }
 
 }}
-\keyword{}
+\keyword{methods}
+\concept{simulation}
+\concept{S4 simulation class}
+\concept{pseudo random numbers}
+\concept{RNG}
+\keyword{distribution}

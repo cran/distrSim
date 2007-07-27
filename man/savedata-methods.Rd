@@ -29,4 +29,6 @@ and \code{\link{Contsimulation-class}}
 \code{\link{Contsimulation-class}}
 \code{\link[distrTEst]{Evaluation-class}}
 }
-\keyword{}
+\keyword{methods}
+\keyword{file}
+\concept{save}

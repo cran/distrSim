@@ -17,4 +17,11 @@ object) }
 \item{Data<-}{\code{signature(object = "Simulation")}: ERROR: A change of the data is not allowed. }
 \item{Data<-}{\code{signature(object = "Contsimulation")}: ERROR: A change of the data is not allowed. }
 }}
-\keyword{}
+\concept{simulation}
+\concept{S4 simulation class}
+\concept{accessor function}
+\concept{contaminated data}
+\concept{realistic data}
+\concept{contamination}
+\keyword{methods}
+\keyword{distribution}

@@ -10,4 +10,7 @@
 
 \item{obsDim}{\code{signature(object = "Dataclass")}: returns the number of obsDim }
 }}
-\keyword{}
+\keyword{manip}
+\concept{accessor function}
+\keyword{methods}
+\concept{S4 data class}

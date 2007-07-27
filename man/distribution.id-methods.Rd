@@ -12,4 +12,10 @@
 \item{distribution.id}{\code{signature(object = "Contsimulation")}: returns the distribution of the ideal data }
 \item{distribution.id<-}{\code{signature(object = "Contsimulation")}: changes the distribution of the ideal data}
 }}
-\keyword{}
+\concept{simulation}
+\concept{S4 simulation class}
+\concept{accessor function}
+\concept{replacement function}
+\concept{ideal distribution}
+\keyword{methods}
+\keyword{distribution}

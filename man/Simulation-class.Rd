@@ -93,4 +93,6 @@ savedata(S) # saves the object in the directory of R...
 load("xyz") # loads it again...
 Data(S) # ...without the data - use simulate to return it!
 }
-\keyword{}
+\keyword{manip}
+\concept{S4 data class}
+\concept{S4 simulation class}

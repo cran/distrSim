@@ -3,6 +3,21 @@
 ######################################################################
 
 ##############
+v 1.9 
+##############
+
+* adapted the naming of the .R files to the use of the (later written)
+  extension packages 
+  (and according to http://tolstoy.newcastle.edu.au/R/help/06/03/22558.html)
+* checked all source file to adhere to the 80char's-per-line rule
+* mentioned in package-help: startup messages may now also be suppressed by
+  suppressPackageStartupMessages() (from package 'base')
+* Version-management 
+   + moved generics to isOldVersion(), conv2NewVersion() from distrSim to distr
+   + replaced isOldVersion() method for signature "Dataclass" by method
+     for signature "ANY" from distr
+
+##############
 v 1.8
 ##############
 

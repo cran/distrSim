@@ -120,4 +120,6 @@ Data(D) # the original data: matrix(c(1,2,3,4,5,6),2)
 #if you have distrTEst available:
 #evaluate(object = D, estimator = mean) # returns the mean of each variable
 }
-\keyword{}
+\keyword{manip}
+\concept{S4 data class}
+\concept{S4 simulation class}
