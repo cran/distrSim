@@ -1,4 +1,4 @@
-be08a73b7b86a9518a4952b0eb9a8aaa *DESCRIPTION
+22baeea0c58c38926d6a27355868eaf0 *DESCRIPTION
 0f9c35ac5cfbb6ed8890257279ba791a *NAMESPACE
 d2032ab269c88f4f1a86401a53030de4 *R/01.R
 6ea0211296f7f5ad54d311a31b9a420e *R/AllClasses.R
@@ -9,7 +9,7 @@ a8066de62b4ae5975c6aa3e4a93bea5b *R/Contsimulation-Class.R
 17ca38234a277ec4d3ad96e0d4c2bda5 *R/SeqDataFrames-Class.R
 b890e906c943c89518f6aefc6d1a9402 *R/Simulation-Class.R
 1fc54789db9da5b593fa2abecfa34435 *R/distrSimOptions.R
-f4c0a663ffc3c66407384e6d00000e43 *R/plot-methods.R
+ae59ff0b273974292ade7011b8a43d14 *R/plot-methods.R
 03228be1bfabbf59494012cd3e61c913 *R/print-show-methods.R
 cc31fa03618434d5e1e08a1152a13be3 *R/rbind-methods.R
 d6e576c202c23b9110cd1b8cad1bd469 *R/savedata-methods.R
@@ -21,9 +21,9 @@ e01a4cd2e96ce925be3ec639f11121c1 *demo/00Index
 40d34dd263d7beff34ce58697ab0bbca *demo/Simulate.R
 a6e0c82817b33335d19b4b64a290af92 *inst/CITATION
 1fa96a7925fe29714c9416c64f28133d *inst/MASKING
-dc9968bb72ca52996a35566d05841cda *inst/NEWS
+a837e9818f3cf60e58becd8e96d8af8b *inst/NEWS
 4ec304731cba18722b3eceb90f33e9de *inst/TOBEDONE
-5dbbd3f1f66e7d9c2b1bd74adb4fea79 *man/0distrSim-package.Rd
+42ab33938dc4e21e998debf80373ff61 *man/0distrSim-package.Rd
 582df61513e932a0989150fd64a3de27 *man/Contsimulation-class.Rd
 a7abaa827c0df37829ae213a58b8c51c *man/Data-methods.Rd
 1da708b9c66697f6c6a1f5cbc94fba64 *man/Data.c-methods.Rd
@@ -42,7 +42,7 @@ f0685cfe1a56f478847df3081daf22b4 *man/filename-methods.Rd
 b51c4e7691997d95b8c8a23fc1395427 *man/ind-methods.Rd
 23cb2c101260beddbeceed9347bae401 *man/name-methods.Rd
 15fd453c515475e391266cebec3a94d1 *man/obsDim-methods.Rd
-33db0189adb180dbf9e24f022c3bce8b *man/plot-methods.Rd
+804db3e2409fd6bf30807596f9f022eb *man/plot-methods.Rd
 12cbe4eb436da9144d0da30c014d1d02 *man/print-methods.Rd
 4f0a4de379216124c822f08ab20341f5 *man/rate-methods.Rd
 a34ee2aaecd119924cc334c3ac3fc8bf *man/runs-methods.Rd
