@@ -120,6 +120,9 @@ load("xyz.sav") # loads the original object "D"
 Data(D) # the original data: matrix(c(1,2,3,4,5,6),2)
 #if you have distrTEst available:
 #evaluate(object = D, estimator = mean) # returns the mean of each variable
+## clean up
+unlink("xyz.sav")
+unlink("xyz.sav.comment")
 }
 \keyword{manip}
 \concept{S4 data class}

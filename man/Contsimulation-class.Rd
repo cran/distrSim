@@ -119,6 +119,8 @@ Data(cs) # different data
 savedata(cs) # saves the object in the working directory of R...
 load("csim") # loads it again...
 Data(cs) # ...without the data - use simulate to return it!
+## clean up
+unlink("csim")
 }
 \keyword{manip}
 \concept{S4 data class}

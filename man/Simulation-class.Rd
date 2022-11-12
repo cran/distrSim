@@ -92,6 +92,7 @@ Data(S) # different data
 savedata(S) # saves the object in the directory of R...
 load("xyz") # loads it again...
 Data(S) # ...without the data - use simulate to return it!
+unlink("xyz")
 }
 \keyword{manip}
 \concept{S4 data class}
