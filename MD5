@@ -1,4 +1,4 @@
-63b1663495d71a754c4d547ea0d6e235 *DESCRIPTION
+7fa0023e5f158c9d74870fe5f8e06fdf *DESCRIPTION
 0f9c35ac5cfbb6ed8890257279ba791a *NAMESPACE
 d2032ab269c88f4f1a86401a53030de4 *R/01.R
 6ea0211296f7f5ad54d311a31b9a420e *R/AllClasses.R
@@ -19,11 +19,11 @@ ada1531a1a782906d0e0fa329dc62199 *R/simulation.R
 0923338d59c4a78ac76c2a30f626827d *R/versionManagement.R
 e01a4cd2e96ce925be3ec639f11121c1 *demo/00Index
 40d34dd263d7beff34ce58697ab0bbca *demo/Simulate.R
-a6e0c82817b33335d19b4b64a290af92 *inst/CITATION
+0dd54e6534f42a346ab5f230e5b5b5a3 *inst/CITATION
 1fa96a7925fe29714c9416c64f28133d *inst/MASKING
 4f6ca2f38fc92399872413d3e0a76559 *inst/NEWS
 4ec304731cba18722b3eceb90f33e9de *inst/TOBEDONE
-2c2a2c3c07716a1d7521d25d71b49a4b *man/0distrSim-package.Rd
+dafe84a0406d57f93c09f9cfe7e3ccd7 *man/0distrSim-package.Rd
 d730f08f29849bbecb9c7f5e42a818e8 *man/Contsimulation-class.Rd
 a7abaa827c0df37829ae213a58b8c51c *man/Data-methods.Rd
 1da708b9c66697f6c6a1f5cbc94fba64 *man/Data.c-methods.Rd
